@@ -19,4 +19,13 @@ class DefaultController extends AbstractController
         return new Response("Tutaj będzie Staszkowe API");
     }
 
+    /**
+     * @return Response
+     * @Route("/test", name="test")
+     */
+    public function test()
+    {
+        return $this->render("base.html.twig");
+    }
+
 }
