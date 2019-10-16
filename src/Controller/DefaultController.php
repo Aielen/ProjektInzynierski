@@ -12,11 +12,11 @@ class DefaultController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/xx", name="index")
+     * @Route("/", name="index")
      */
     public function index()
     {
-        return new Response("ala ma kota");
+        return new Response("Tutaj będzie Staszkowe API");
     }
 
 }
