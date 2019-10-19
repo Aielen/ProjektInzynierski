@@ -8,4 +8,5 @@
 /vendor/
 .idea
 .htaccess
+.env
 ###< symfony/framework-bundle ###
