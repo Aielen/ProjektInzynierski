@@ -3,6 +3,8 @@
 
 namespace PI\Controller;
 
+use PI\Employee\Exception\EmployeeNotFoundException;
+use PI\Employee\Response\CORSResponse;
 use PI\Employee\Service\EmployeeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -38,12 +40,23 @@ class ApiController extends AbstractController
      */
     public function getEmployeeInfo(Request $request)
     {
-        $post = array_merge($request->request->all(), $request->query->all());
+        try
+        {
+            $post = array_merge($request->request->all(), $request->query->all());
+            $employee = $this->employeeService->getEmployeeInfo($post["employeeId"]);
 
-        return new JsonResponse([
-            "status"    => self::STATUS_OK,
-            "employee"  => $this->employeeService->getEmployeeInfo($post["employeeId"])
-        ]);
+            return new CORSResponse([
+                "status"    => self::STATUS_OK,
+                "employee"  => $employee
+            ]);
+        }
+        catch (EmployeeNotFoundException $e)
+        {
+            return new CORSResponse([
+                "status"    => self::STATUS_ERROR,
+                "message"   => "Pracownik o żądanym ID nie istnieje"
+            ]);
+        }
     }
 
 }
