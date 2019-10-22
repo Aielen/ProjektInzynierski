@@ -16,16 +16,11 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-        return $this->render("/index/index_page.html.twig");
-    }
+        $data = [];
+        $data["version_commit_hash"] = shell_exec("git rev-parse --verify HEAD");
+        $data["version_commit_date"] = shell_exec("git log -1 --format=%ci --date=local");
 
-    /**
-     * @Route("/v", name="current_version")
-     */
-    public function currentVersion()
-    {
-        $version = shell_exec("git rev-parse --verify HEAD");
-        return new Response($version);
+        return $this->render("/index/index_page.html.twig", $data);
     }
 
 }
