@@ -45,7 +45,7 @@ class ApiController extends AbstractController
             $post = array_merge($request->request->all(), $request->query->all());
             $employee = $this->employeeService->getEmployeeInfo($post["employeeId"]);
 
-            return new CORSResponse([
+            return new JsonResponse([
                 "status"    => self::STATUS_OK,
                 "employee"  => $employee
             ]);
