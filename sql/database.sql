@@ -162,3 +162,5 @@ CREATE TRIGGER trigger_entrance_update BEFORE UPDATE ON entrance
     SET new.modified := now();
 END;
 
+INSERT INTO employee (employee_id, employee_firstname, employee_lastname, employee_email, employee_phone)
+    VALUE ('1234567891234', 'Stanisław', 'S', 'stanislaw@sabre.pl', '11111111');
