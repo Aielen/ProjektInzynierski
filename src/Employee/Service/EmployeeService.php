@@ -4,6 +4,7 @@ namespace PI\Employee\Service;
 
 use PI\Employee\Exception\EmployeeNotFoundException;
 use PI\Employee\Repository\EmployeeRepository;
+use PI\Employee\ValueObject\Employee;
 
 class EmployeeService
 {
@@ -36,6 +37,16 @@ class EmployeeService
         }
 
         return $employee;
+    }
+
+    /**
+     * @param Employee $employee
+     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function insertEmployee(Employee $employee) : void
+    {
+        $this->employeeRepository->insertEmployee($employee);
     }
 
 }

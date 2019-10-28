@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div style="width: 100%; float: left;">
+            ID pracownika: <input type="text" name="id" />
+        </div>
+        <div style="width: 100%; float: left;">
+            Imię: <input type="text" name="name" />
+        </div>
+        <div style="width: 100%; float: left;">
+            Nazwisko: <input type="text" name="lastname" />
+        </div>
+        <div style="width: 100%; float: left;">
+            Email: <input type="text" name="email" />
+        </div>
+        <div style="width: 100%; float: left;">
+            Telefon: <input type="text" name="phone" />
+        </div>
+        <div style="width: 100%; float: left;">
+            Fotka: <input type="file" name="avatar" />
+        </div>
+        <div style="width: 100%; float: left; margin-top: 50px;">
+            <button>Dodaj pracownika</button>
+        </div>
+    </form>
+{% endblock %}

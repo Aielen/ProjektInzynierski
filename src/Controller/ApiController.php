@@ -4,6 +4,7 @@
 namespace PI\Controller;
 
 use PI\Employee\Exception\EmployeeNotFoundException;
+use PI\Employee\Guard\ApiGuardInterface;
 use PI\Employee\Response\CORSResponse;
 use PI\Employee\Service\EmployeeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +12,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiController extends AbstractController
+class ApiController extends AbstractController implements ApiGuardInterface
 {
     const STATUS_OK = "ok";
     const STATUS_ERROR = "error";
+    const API_KEY = "QE7MMz9TnyA7GdrKCp4KFuVMwmnwMnuQ";
 
     /**
      * @var EmployeeService

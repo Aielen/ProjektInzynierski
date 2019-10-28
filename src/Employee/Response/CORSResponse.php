@@ -1,14 +1,18 @@
 <?php
 
-
 namespace PI\Employee\Response;
-
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CORSResponse extends JsonResponse
 {
-    public function __construct($data = null, int $status = 200, array $headers = [], bool $json = false)
+
+    /**
+     * CORSResponse constructor.
+     * @param null $data
+     * @param int $status
+     */
+    public function __construct($data = null, int $status = 200)
     {
         $headers = [
             'Access-Control-Allow-Origin' => '*',
@@ -18,6 +22,7 @@ class CORSResponse extends JsonResponse
             'Access-Control-Max-Age' => 1728000,
         ];
 
-        parent::__construct($data, $status, $headers, $json);
+        parent::__construct($data, $status, $headers, false);
     }
+
 }
