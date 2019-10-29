@@ -1,0 +1,2 @@
+ALTER TABLE file ADD COLUMN file_name VARCHAR(255) DEFAULT '';
+

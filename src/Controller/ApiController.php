@@ -8,8 +8,10 @@ use PI\Employee\Guard\ApiGuardInterface;
 use PI\Employee\Response\CORSResponse;
 use PI\Employee\Service\EmployeeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController implements ApiGuardInterface
@@ -58,6 +60,24 @@ class ApiController extends AbstractController implements ApiGuardInterface
                 "status"    => self::STATUS_ERROR,
                 "message"   => "Pracownik o żądanym ID nie istnieje"
             ]);
+        }
+    }
+
+    /**
+     * @Route("/api/getEmployeeAvatar/{fileId}", name="/api/getEmployeeAvatar")
+     *
+     * @param int $fileId
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function getEmployeeAvatar(int $fileId)
+    {
+        $avatarsPath = getenv("AVATARS_PATH");
+        $avatarPath = $avatarsPath . $fileId . ".jpg";
+
+        if (file_exists($avatarPath)) {
+            return $this->file($avatarPath, $fileId . ".jpg", ResponseHeaderBag::DISPOSITION_INLINE);
+        } else {
+            throw new FileNotFoundException("Nie znaleziono żądanego pliku!");
         }
     }
 

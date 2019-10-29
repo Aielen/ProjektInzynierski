@@ -4,7 +4,6 @@ namespace PI\Employee\Repository;
 
 use Doctrine\DBAL\Connection;
 use PI\Employee\ValueObject\Employee;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class EmployeeRepository
 {
@@ -14,14 +13,12 @@ class EmployeeRepository
     private $connection;
 
     /**
-     * @var KernelInterface
+     * EmployeeRepository constructor.
+     * @param Connection $connection
      */
-    private $kernel;
-
-    public function __construct(Connection $connection, KernelInterface $kernel)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->kernel = $kernel;
     }
 
     /**
@@ -33,10 +30,9 @@ class EmployeeRepository
     {
         $data = $this->connection->executeQuery("
             SELECT 
-                employee.*, 
-                REPLACE(file_path, '/public', '') AS avatar_path
+                employee.*
             FROM employee
-            INNER JOIN file ON employee.avatar_id = file.file_id
+            LEFT JOIN file ON employee.avatar_id = file.file_id
             WHERE employee_id = " . $this->connection->quote($employeeId) . "
         ")->fetch();
 
@@ -75,14 +71,16 @@ class EmployeeRepository
                 SELECT LAST_INSERT_ID() AS id;
             ")->fetch()["id"];
 
-            $avatarPath = $this->kernel->getProjectDir() . getenv("AVATARS_PATH");
+            $avatarPath = getenv("AVATARS_PATH") . $lastInsertedFileId . ".jpg";
+            $avatarName = $lastInsertedFileId . ".jpg";
             $avatarContent = file_get_contents($employee->getAvatar()->getPathname());
-            file_put_contents($avatarPath . $lastInsertedFileId . ".jpg", $avatarContent);
+            file_put_contents($avatarPath, $avatarContent);
             $avatarPathDb = getenv("AVATARS_PATH") . $lastInsertedFileId . ".jpg";
 
             $this->connection->executeQuery("
                 UPDATE file 
-                SET file_path = " . $this->connection->quote($avatarPathDb) . ", file_type = 'image'
+                SET file_path = " . $this->connection->quote($avatarPathDb) . ", file_type = 'image',
+                file_name = " . $this->connection->quote($avatarName) . "
                 WHERE file_id = " . $this->connection->quote($lastInsertedFileId) . "
             ");
 
