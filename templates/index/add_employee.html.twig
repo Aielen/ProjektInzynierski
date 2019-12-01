@@ -1,24 +1,54 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data" style="width: 600px; margin: 0 auto;">
         <div style="width: 100%; float: left;">
-            ID pracownika: <input type="text" name="id" />
+            <div style="width: 30%; float: left;">
+                ID pracownika:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="text" name="id" />
+            </div>
         </div>
         <div style="width: 100%; float: left;">
-            Imię: <input type="text" name="name" />
+            <div style="width: 30%; float: left;">
+                Imię:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="text" name="name" />
+            </div>
         </div>
         <div style="width: 100%; float: left;">
-            Nazwisko: <input type="text" name="lastname" />
+            <div style="width: 30%; float: left;">
+                Nazwisko:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="text" name="lastname" />
+            </div>
         </div>
         <div style="width: 100%; float: left;">
-            Email: <input type="text" name="email" />
+            <div style="width: 30%; float: left;">
+                Email:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="text" name="email" />
+            </div>
         </div>
         <div style="width: 100%; float: left;">
-            Telefon: <input type="text" name="phone" />
+            <div style="width: 30%; float: left;">
+                Telefon:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="text" name="phone" />
+            </div>
         </div>
         <div style="width: 100%; float: left;">
-            Fotka: <input type="file" name="avatar" />
+            <div style="width: 30%; float: left;">
+                Fotka:
+            </div>
+            <div style="width: 70%; float: left;">
+                <input type="file" name="avatar" />
+            </div>
         </div>
         <div style="width: 100%; float: left; margin-top: 50px;">
             <button>Dodaj pracownika</button>

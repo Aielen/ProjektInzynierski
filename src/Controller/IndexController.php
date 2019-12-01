@@ -26,44 +26,4 @@ class IndexController extends AbstractController
         return $this->render("/index/index_page.html.twig", $data);
     }
 
-    /**
-     * @return Response
-     * @Route("/dodaj", name="addEmployeeGet", methods={"GET"})
-     */
-    public function addEmployeeGet()
-    {
-        $data = [];
-
-        return $this->render("/index/add_employee.html.twig", $data);
-    }
-
-    /**
-     * @param Request $request
-     * @param EmployeeService $employeeService
-     * @return Response
-     * @throws \Doctrine\DBAL\ConnectionException
-     * @throws \Doctrine\DBAL\DBALException
-     *
-     * @Route("/dodaj", name="addEmployeePost", methods={"POST"})
-     */
-    public function addEmployeePost(Request $request, EmployeeService $employeeService)
-    {
-        $post = $request->request->all();
-        $avatar = current($request->files->all());
-
-        $employee = new Employee([
-            "id"        => $post["id"],
-            "email"     => $post["email"],
-            "firstname" => $post["name"],
-            "lastname"  => $post["lastname"],
-            "phone"     => $post["phone"],
-            "avatar"    => $avatar
-        ]);
-
-        $employeeService->insertEmployee($employee);
-
-        return new Response("OK. ID pracownika: " . $employee->getEmployeeId());
-    }
-
-
 }
