@@ -25,13 +25,14 @@
     function postFile(file) {
         let formdata = new FormData();
         formdata.append("image", file);
-        formdata.append("employeeId", "555");
+        formdata.append("employeeId", "88");
         formdata.append("buildingId", "1");
         formdata.append("workplaceId", "1");
-        formdata.append("entranceType", "in");
+        formdata.append("entranceType", "out");
 
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://pi.local/api/saveEmployeeEntranceOrExit', true);
+        //xhr.open('POST', 'http://pi.local/api/saveEmployeeEntranceOrExit', true);
+        xhr.open('POST', 'http://91.189.248.139/api/saveEmployeeEntranceOrExit', true);
         xhr.onload = function () {
             if (this.status === 200)
                 console.log(this.response);

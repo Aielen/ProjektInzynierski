@@ -181,12 +181,4 @@ class ApiController extends AbstractController implements ApiGuardInterface
         return new CORSResponse($images);
     }
 
-    /**
-     *  Trzeba dorobic:
-     *  + - routing umozliwiajacy pracownikowi wejscie/wyjsice
-     *  + - routing generujacy statystyki (ile kto srednio spedzil w pracy)
-     *  + - routing sprawdzajacy ilu pracownikow aktualnie jest w danym budynku
-     *  - routing pobierajacy zdjecia, ktore zostaly zrobione podczas wejscia pracownikow
-     */
-
 }
